@@ -26,7 +26,7 @@ RUN python -m pip install \
     --requirement /opt/app/requirements.txt
 
 
-RUN wget -P /opt/app/resources https://dl.fbaipublicfiles.com/segment_anything_2/092824/sam2.1_hiera_large.pt
+#RUN wget -P /opt/app/resources https://dl.fbaipublicfiles.com/segment_anything_2/092824/sam2.1_hiera_large.pt
 
 COPY --chown=user:user inference.py /opt/app/
 COPY --chown=user:user model.py /opt/app/
