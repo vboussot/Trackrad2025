@@ -29,8 +29,8 @@ def save_images(video_array, output_folder):
         image.save(os.path.join(output_folder, f'{i:04d}.jpg'))
 
 def load_sam2():
-    checkpoint = "/opt/app/resources/sam2.1_hiera_large.pt"
-    model_cfg = "configs/sam2.1/sam2.1_hiera_l.yaml"
+    checkpoint = "/opt/app/resources/checkpoint.pt"
+    model_cfg = "configs/sam2.1/sam2.1_hiera_b+.yaml"
     predictor = build_sam2_video_predictor(model_cfg, checkpoint, device = torch.device("cuda"))
     return predictor
 
