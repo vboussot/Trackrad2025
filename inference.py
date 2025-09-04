@@ -21,15 +21,6 @@ def run():
     loading_start_time = time.perf_counter()
 
     # Read the inputs
-    input_frame_rate = load_json_file(
-         location=INPUT_PATH / "frame-rate.json",
-    )
-    input_magnetic_field_strength = load_json_file(
-         location=INPUT_PATH / "b-field-strength.json",
-    )
-    input_scanned_region = load_json_file(
-         location=INPUT_PATH / "scanned-region.json",
-    )
     input_mri_linac_series = load_image_file_as_array(
         location=INPUT_PATH / "images/mri-linacs",
     )
@@ -45,10 +36,7 @@ def run():
     algo_start_time = time.perf_counter()
 
     output_mri_linac_series_targets = run_algorithm(frames=input_mri_linac_series, 
-                                                    target=input_mri_linac_target,
-                                                    frame_rate=input_frame_rate,
-                                                    magnetic_field_strength=input_magnetic_field_strength,
-                                                    scanned_region=input_scanned_region)
+                                                    target=input_mri_linac_target)
 
     print(f"Runtime algorithm: {time.perf_counter() - algo_start_time:.5f} s")
 

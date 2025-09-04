@@ -30,7 +30,9 @@ RUN python -m pip install \
 
 COPY --chown=user:user inference.py /opt/app/
 COPY --chown=user:user model.py /opt/app/
+COPY --chown=user:user download.py /opt/app/
 
+RUN python download.py
 # Add any other files that are needed for your algorithm
 # COPY --chown=user:user <source> <destination>
 
