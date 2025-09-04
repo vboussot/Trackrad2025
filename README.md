@@ -41,7 +41,7 @@ We compared the performance of **SAM 2.1 b+ with and without fine-tuning** on **
 
 | Model                   | DSC (↑)        | CD [mm] (↓) | Rel. D98 (↑)   | SD95 [mm] (↓) | SDavg [mm] (↓) |
 |-------------------------|----------------|-------------|----------------|----------------|----------------|
-| SAM 2.1 b+ (fine-tuned) | **0.9152 **| **1.4912 **  | **0.9803 **  | 4.2141      | 1.5008      |
+| SAM 2.1 b+ (fine-tuned) | **0.9152**| **1.4912**  | **0.9803**  | **4.2141**      | **1.5008**      |
 | SAM 2.1 b+ (no fine-tune)| 0.9039     | 1.8864      | 0.9312      | 4.9406      | 1.7000      |
 
 👉 Fine-tuning on the annotated TrackRAD2025 data significantly improved segmentation and tracking performance.
