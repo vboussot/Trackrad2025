@@ -22,9 +22,9 @@ We evaluated several foundation model variants and prompting strategies on the a
 | **ASD (mm)**   | 3.88     | 1.27      | 1.29       | **1.20**  | 17.01   | 27.32          |
 | **CD (mm)**    | 6.42     | 1.51      | 1.46       | **1.34**  | 17.28   | 27.51          |
 
-#### 📌 Effect of fine-tuning (on SAM 2.1 l):
+#### 📌 Effect of fine-tuning (on SAM 2.1 b+):
 
-| Metric         | SAM 2.1 l | Ensemble prompt | Fine-tuned SAM 2.1 l |
+| Metric         | SAM 2.1 b+ | Ensemble prompt | Fine-tuned SAM 2.1 b+ |
 |----------------|-----------|------------------|------------------------|
 | **DSC**        | 0.916     | 0.908            | **0.929**              |
 | **HD (mm)**    | 3.26      | 3.51             | **2.78**               |
