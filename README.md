@@ -46,38 +46,80 @@ Our final submission achieved the **6th best overall position** on the TrackRAD2
 We achieved:
 - **4th best Dice** among all teams
 - **3rd best relative dose (D98)** accuracy
-
-## 🚀 Inference instructions
+## 🚀 Inference Instructions
 
 ### 1. Download the fine-tuned model
 
-Automatically download from Hugging Face:
+Automatically download the fine-tuned SAM model from Hugging Face:
 
 ```bash
 python download.py
 ```
-This will create the following file: ./SAM2.1_b+_finetune.pt
 
-🔗 Hugging Face model page: https://huggingface.co/VBoussot/Trackrad2025
+This will create the following file:
+
+```
+./SAM2.1_b+_finetune.pt
+```
+
+🔗 [Model on Hugging Face](https://huggingface.co/VBoussot/Trackrad2025)
+
+---
 
 ### 2. Prepare your dataset
+
+You can prepare the dataset manually or automatically.
+
+#### ✅ Option 1 – Manual structure
 
 Expected folder structure:
 
 ```
-./input/
-├── images/
-│   ├── mri-linacs/
-│   │   └── image.mha
-│   └── mri-linac-target/
-│       └── mask.mha
+./Dataset/
+├── A_001/
+│   ├── IMAGE.mha
+│   └── MASK.mha
+├── A_002/
+│   ├── IMAGE.mha
+│   └── MASK.mha
+└── ...
 ```
-You can modify inference.py if your file names differ.
+
+- `IMAGE.mha` is the input cine-MRI frame  
+- `MASK.mha` is the binary segmentation mask of the first annotated frame
+
+#### ⚙️ Option 2 – Automatic generation
+
+Run the following command to automatically convert the TrackRAD2025 labeled dataset into the proper format:
+
+```bash
+python data.py
+```
+
+This will generate the `./Dataset/` folder with one subfolder per patient (`A_001/`, etc.), ready for training or inference.
+
+---
 
 ### 3. Run inference
+
+Use the following command to run inference on the prepared dataset:
 
 ```bash
 python inference.py
 ```
 
-Predictions will be saved in ./output/.
+Predictions will be saved as:
+
+```
+./Dataset/A_XXX/SAM21FINETUNE.mha
+```
+
+---
+
+### 4. Run evaluation
+
+To evaluate the predictions against the ground truth masks:
+
+```bash
+konfai EVALUATION -y
+```
