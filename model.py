@@ -1,18 +1,10 @@
-"""
-Edit this file to implement your algorithm. 
-
-The file must contain a function called `run_algorithm` that takes two arguments:
-- `frames` (numpy.ndarray): A 3D numpy array of shape (W, H, T) containing the MRI linac series.
-- `target` (numpy.ndarray): A 2D numpy array of shape (W, H, 1) containing the MRI linac target.
-"""
-from pathlib import Path
 import numpy as np
 import torch
 import os
 from PIL import Image
 from sam2.build_sam import build_sam2_video_predictor
-
-RESOURCE_PATH = Path("resources")  # load weights and other resources from this directory
+import uuid
+import shutil
 
 def prepare_video(array: np.ndarray):
     video = []
@@ -29,6 +21,9 @@ def save_images(video_array, output_folder):
         image.save(os.path.join(output_folder, f'{i:04d}.jpg'))
 
 def load_sam2():
+    if not os.path.exists("./SAM2.1_b+_finetune.pt"):
+        import download
+        download.download()
     checkpoint = "./SAM2.1_b+_finetune.pt"
     model_cfg = "configs/sam2.1/sam2.1_hiera_b+.yaml"
     predictor = build_sam2_video_predictor(model_cfg, checkpoint, device = torch.device("cuda"))
@@ -36,8 +31,6 @@ def load_sam2():
 
 def run_algorithm(frames: np.ndarray, target: np.ndarray) -> np.ndarray:
     """
-    Implement your algorithm here.
-
     Args:
     - frames (numpy.ndarray): A 3D numpy array of shape (W, H, T) containing the MRI linac series.
     - target (numpy.ndarray): A 2D numpy array of shape (W, H, 1) containing the MRI linac target.
@@ -46,7 +39,7 @@ def run_algorithm(frames: np.ndarray, target: np.ndarray) -> np.ndarray:
 
     frames = frames.transpose((2,0,1))
     video_tensor = prepare_video(frames)
-    tmp_dir = "./tmp/"
+    tmp_dir = f"tmp_{uuid.uuid4().hex[:6]}"
     os.makedirs(tmp_dir, exist_ok=True)
     save_images(video_tensor.numpy(), tmp_dir)
     
@@ -55,7 +48,7 @@ def run_algorithm(frames: np.ndarray, target: np.ndarray) -> np.ndarray:
     with torch.inference_mode(), torch.autocast("cuda", dtype=torch.bfloat16):
         state = predictor.init_state(tmp_dir)
 
-        frame_idx, out_obj_ids, out_mask_logits = predictor.add_new_mask(
+        _, _, out_mask_logits = predictor.add_new_mask(
             inference_state=state,
             frame_idx=0,
             obj_id=1,
@@ -64,4 +57,22 @@ def run_algorithm(frames: np.ndarray, target: np.ndarray) -> np.ndarray:
         masks_out = []
         for _, _, out_mask_logits in predictor.propagate_in_video(state):
             masks_out.append((out_mask_logits[0] > 0.0).cpu().numpy().astype(np.uint8))  # [H, W]
+    shutil.rmtree(tmp_dir)
     return np.stack(masks_out).squeeze().transpose((1,2,0))  # [T, H, W]
+
+if __name__ == "__main__":
+    from konfai.utils.dataset import Dataset
+    import SimpleITK as sitk
+
+    dataset = Dataset("./Dataset/", "mha")
+    names = dataset.get_names("IMAGE")
+    for name in names:
+        IMAGE = dataset.read_image("IMAGE", name)
+        MASK = dataset.read_image("MASK", name)
+
+        data_result = run_algorithm(sitk.GetArrayFromImage(IMAGE), sitk.GetArrayFromImage(MASK))
+        mask_result = sitk.GetImageFromArray(data_result)
+        mask_result.CopyInformation(IMAGE)
+        dataset.write("SAM2.1FINETUNE", name, mask_result)
+
+        

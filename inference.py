@@ -51,13 +51,6 @@ def run():
     
     return 0
 
-
-def load_json_file(*, location):
-    # Reads a json file
-    with open(location, 'r') as f:
-        return json.loads(f.read())
-
-
 def load_image_file_as_array(*, location):
     # Use SimpleITK to read a file
     input_files = glob(str(location / "*.tiff")) + glob(str(location / "*.mha"))
@@ -79,20 +72,6 @@ def write_array_as_image_file(*, location, array):
         location / f"output{suffix}",
         useCompression=True,
     )
-
-
-def _show_torch_cuda_info():
-    import torch
-
-    print("=+=" * 10)
-    print("Collecting Torch CUDA information")
-    print(f"Torch CUDA is available: {(available := torch.cuda.is_available())}")
-    if available:
-        print(f"\tnumber of devices: {torch.cuda.device_count()}")
-        print(f"\tcurrent device: { (current_device := torch.cuda.current_device())}")
-        print(f"\tproperties: {torch.cuda.get_device_properties(current_device)}")
-    print("=+=" * 10)
-
 
 if __name__ == "__main__":
     raise SystemExit(run())

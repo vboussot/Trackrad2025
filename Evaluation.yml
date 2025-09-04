@@ -1,0 +1,28 @@
+Evaluator:
+  metrics:
+    LABELS:
+      targets_criterions:
+        SAM21FINETUNE:
+          criterions_loader:
+            metric:Dice: {}
+            metric:HausdorffDistance: {}
+            metric:SurfaceDistance: {}
+            metric:EuclideanCenterDistance: {}
+
+  Dataset:
+    groups_src:
+      LABELS:
+        groups_dest:
+          LABELS:
+            transforms: None
+      SAM21FINETUNE:
+        groups_dest:
+          SAM21FINETUNE:
+            transforms: None
+    subset: None
+    filter: None
+    dataset_filenames:
+    - ./Dataset:mha
+    validation: None
+    num_workers: 4
+  train_name: FINETUNE_SAM2.1
