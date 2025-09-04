@@ -136,3 +136,21 @@ To evaluate the predictions against the ground truth masks:
 ```bash
 konfai EVALUATION -y
 ```
+
+---
+
+## 📚 References
+
+- Kirillov, A., Mintun, E., Ravi, N., Mao, H., Rolland, C., Gustafson, L., Xiao, T., Whitehead, S., Berg, A. C., Lo, W.-Y., *et al.* (2023).  
+  **Segment Anything**. *Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)*, pp. 4015–4026.  
+  [https://arxiv.org/abs/2304.02643](https://arxiv.org/abs/2304.02643)
+
+- Ma, J., He, Y., Li, F., Han, L., You, C., & Wang, B. (2024).  
+  **Segment Anything in Medical Images**. *Nature Communications*, 15, 654.  
+  [https://www.nature.com/articles/s41467-024-44979-3](https://www.nature.com/articles/s41467-024-44979-3)
+
+- Boussot, V., & Dillenseger, J.-L. (2025).  
+  **KonfAI: A Modular and Fully Configurable Framework for Deep Learning in Medical Imaging**. *arXiv preprint arXiv:2508.09823*.  
+  [https://arxiv.org/abs/2508.09823](https://arxiv.org/abs/2508.09823)
+
+
