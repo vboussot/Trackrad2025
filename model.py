@@ -29,21 +29,18 @@ def save_images(video_array, output_folder):
         image.save(os.path.join(output_folder, f'{i:04d}.jpg'))
 
 def load_sam2():
-    checkpoint = "/opt/app/resources/checkpoint.pt"
+    checkpoint = "./SAM2.1_b+_finetune.pt"
     model_cfg = "configs/sam2.1/sam2.1_hiera_b+.yaml"
     predictor = build_sam2_video_predictor(model_cfg, checkpoint, device = torch.device("cuda"))
     return predictor
 
-def run_algorithm(frames: np.ndarray, target: np.ndarray, frame_rate: float, magnetic_field_strength: float, scanned_region: str) -> np.ndarray:
+def run_algorithm(frames: np.ndarray, target: np.ndarray) -> np.ndarray:
     """
     Implement your algorithm here.
 
     Args:
     - frames (numpy.ndarray): A 3D numpy array of shape (W, H, T) containing the MRI linac series.
     - target (numpy.ndarray): A 2D numpy array of shape (W, H, 1) containing the MRI linac target.
-    - frame_rate (float): The frame rate of the MRI linac series.
-    - magnetic_field_strength (float): The magnetic field strength of the MRI linac series.
-    - scanned_region (str): The scanned region of the MRI linac series.
     """
     predictor = load_sam2()
 
