@@ -105,7 +105,7 @@ This will generate the `./Dataset/` folder with one subfolder per patient (`A_00
 Use the following command to run inference on the prepared dataset:
 
 ```bash
-python inference.py
+python model.py
 ```
 
 Predictions will be saved as:
