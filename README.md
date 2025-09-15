@@ -59,6 +59,9 @@ Our final submission achieved the **6th best overall position** on the TrackRAD2
 We achieved:
 - **4th best Dice** among all teams
 - **3rd best relative dose (D98)** accuracy
+
+🔗 [View the full TrackRAD2025 leaderboard](https://trackrad2025.grand-challenge.org/evaluation/final-testing/leaderboard/)
+
 ## 🚀 Inference Instructions
 
 ### 1. Download the fine-tuned model
