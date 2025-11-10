@@ -1,4 +1,4 @@
-[![Grand Challenge](https://img.shields.io/badge/Grand%20Challenge-TrackRad_2025-blue)](https://trackrad2025.grand-challenge.org/) [![Hugging Face](https://img.shields.io/badge/🤗%20Hugging%20Face-TrackRAD_2025-orange)](https://huggingface.co/VBoussot/Trackrad2025)
+[![Grand Challenge](https://img.shields.io/badge/Grand%20Challenge-TrackRad_2025-blue)](https://trackrad2025.grand-challenge.org/) [![Paper](https://img.shields.io/badge/📌%20Paper-BreizhTrack-blue)](https://arxiv.org/pdf/2510.25990)  [![Hugging Face](https://img.shields.io/badge/🤗%20Hugging%20Face-TrackRAD_2025-orange)](https://huggingface.co/VBoussot/Trackrad2025)
 
 # TrackRAD2025: Real-time Tumor Tracking (6th place 🏅)
 
