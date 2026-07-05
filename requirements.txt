@@ -1,5 +1,5 @@
 SimpleITK
 numpy
 sam2
-konfai==1.2.9
+konfai[itk]==1.5.9
 huggingface_hub

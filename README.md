@@ -64,6 +64,15 @@ We achieved:
 
 ## 🚀 Inference Instructions
 
+Inference uses a fine-tuned **SAM 2.1** model; evaluation is run with [KonfAI](https://github.com/vboussot/KonfAI)
+(`konfai EVALUATION`) using the custom metrics in `metric.py`.
+
+### 0. Install dependencies
+
+```bash
+pip install -r requirements.txt   # SAM 2.1 (sam2) + konfai[itk]==1.5.9
+```
+
 ### 1. Download the fine-tuned model
 
 Automatically download the fine-tuned SAM model from Hugging Face:
@@ -109,7 +118,7 @@ Expected folder structure:
 Run the following command to automatically convert the TrackRAD2025 labeled dataset into the proper format:
 
 ```bash
-python data.py
+python Data.py
 ```
 
 This will generate the `./Dataset/` folder with one subfolder per patient (`A_001/`, etc.), ready for training or inference.
